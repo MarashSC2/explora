@@ -9,12 +9,13 @@ import explora.de.exploramaterial.database.DatabaseConstants;
  */
 public class User implements Entity{
 
-    private long id;
+    private int id;
     private String email;
     private String name;
     private String password;
 
-    public User(String email, String name, String password) {
+    public User(int id,String email, String name, String password) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.password = password;
@@ -23,6 +24,7 @@ public class User implements Entity{
     public ContentValues getContentValues(){
         ContentValues values = new ContentValues();
 
+        values.put(DatabaseConstants.UserEntry._ID, id);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_NAME, name);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_MAIL, email);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_PASSWORD, password);
@@ -54,11 +56,11 @@ public class User implements Entity{
         this.name = name;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

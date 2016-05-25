@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import explora.de.exploramaterial.Entity.Address;
 import explora.de.exploramaterial.Entity.User;
 
 /**
@@ -17,17 +18,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = DatabaseHelper.class.getSimpleName();
 
-    private UserBuilder userBuilder;
+    private DummyBuilder userBuilder;
 
     public DatabaseHelper(Context context) {
         super(context, DatabaseConstants.DB_NAME, null, DatabaseConstants.DB_VERSION);
-        userBuilder = new UserBuilder();
+        userBuilder = new DummyBuilder();
     }
 
     @Override
     public void onCreate(SQLiteDatabase database) {
         database.execSQL(DatabaseConstants.SQL_CREATE_ENTRIES);
+        database.execSQL(DatabaseConstants.SQL_CREATE_ENTRIESS);
         insertDummyUsers(database);
+        insertDummyAddresses(database);
         Log.d(TAG,"OnCreate() aufgerufen.");
     }
 
@@ -45,7 +48,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    private void insertDummyAddresses(){
+    private void insertDummyAddresses(SQLiteDatabase database){
+        Log.d(TAG,"ADDRESS INSERT");
+        List<Address> startAddresses = userBuilder.getDummyAddresses();
 
+        for(Address address : startAddresses){
+            ContentValues values = address.getContentValues();
+            database.insert(DatabaseConstants.AddressEntry.TABLE_NAME,null,values);
+        }
     }
 }

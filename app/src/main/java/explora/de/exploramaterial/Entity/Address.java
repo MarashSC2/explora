@@ -9,15 +9,25 @@ import explora.de.exploramaterial.database.DatabaseConstants;
  */
 public class Address implements Entity {
 
+    private int id;
     private String country;
     private String city;
     private String street;
     private String zipCode;
 
+    public Address(int id,String country, String city, String street, String zipCode) {
+        this.id = id;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.zipCode = zipCode;
+    }
+
     @Override
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
 
+        values.put(DatabaseConstants.AddressEntry._ID,id);
         values.put(DatabaseConstants.AddressEntry.COLUMN_NAME_COUNTRY, country);
         values.put(DatabaseConstants.AddressEntry.COLUMN_NAME_CITY, city);
         values.put(DatabaseConstants.AddressEntry.COLUMN_NAME_STREET, street);

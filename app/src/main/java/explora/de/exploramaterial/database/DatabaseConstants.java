@@ -26,8 +26,8 @@ public class DatabaseConstants {
                     UserEntry._ID + INTEGER +  PRIMARY_KEY + COMMA_SEP +
                     UserEntry.COLUMN_NAME_NAME + TEXT + NOT_NULL + COMMA_SEP +
                     UserEntry.COLUMN_NAME_MAIL + TEXT + UNIQUE + NOT_NULL + COMMA_SEP +
-                    UserEntry.COLUMN_NAME_PASSWORD + TEXT + NOT_NULL + ");"+
-            CREATE_TABLE + AddressEntry.TABLE_NAME + " (" +
+                    UserEntry.COLUMN_NAME_PASSWORD + TEXT + NOT_NULL + ");";
+    public static final String SQL_CREATE_ENTRIESS = CREATE_TABLE + AddressEntry.TABLE_NAME + " (" +
                     AddressEntry._ID + INTEGER + PRIMARY_KEY + COMMA_SEP +
                     AddressEntry.COLUMN_NAME_COUNTRY + TEXT + NOT_NULL + COMMA_SEP +
                     AddressEntry.COLUMN_NAME_CITY + TEXT + NOT_NULL + COMMA_SEP +

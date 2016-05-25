@@ -1,10 +1,13 @@
-package explora.de.exploramaterial;
+package explora.de.exploramaterial.MainActivity;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import explora.de.exploramaterial.R;
 import explora.de.exploramaterial.database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,10 +18,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
         dbHelper.getWritableDatabase();
-
-        ArrayAdapter adapter = new CityCardAdapter(this,new String[] {"Madrid", "Stalingrad"});
-        ListView cityListView = (ListView) findViewById(R.id.city_list_view);
-
-        cityListView.setAdapter(adapter);
     }
 }

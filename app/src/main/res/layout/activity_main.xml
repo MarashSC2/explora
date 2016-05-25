@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="explora.de.exploramaterial.MainActivity"
+    tools:context=".MainActivity.MainActivity"
     android:orientation="vertical">
 
     <ListView
@@ -16,4 +16,11 @@
         android:layout_height="wrap_content"
         android:dividerHeight="0dp"
         android:divider="@null"></ListView>
+
+    <fragment android:name="explora.de.exploramaterial.MainActivity.CityFragment"
+        android:id="@+id/list"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
