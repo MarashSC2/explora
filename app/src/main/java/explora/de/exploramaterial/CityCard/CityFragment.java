@@ -1,35 +1,39 @@
-package explora.de.exploramaterial.MainActivity;
+package explora.de.exploramaterial.CityCard;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
+import explora.de.exploramaterial.MainActivity.MainActivity;
 import explora.de.exploramaterial.R;
+import explora.de.exploramaterial.TourCard.TourFragment;
 import explora.de.exploramaterial.dao.AddressDAO;
 import explora.de.exploramaterial.database.DatabaseHelper;
 
 /**
  * Created by Marash on 25.05.2016.
  */
-public class CityFragment extends Fragment {
+public class CityFragment extends Fragment implements CityCardClickListener {
 
     private View rootView;
     private Context context;
     private DatabaseHelper dbHelper;
 
+    private int containerId;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        containerId = container.getId();
         rootView = inflater.inflate(R.layout.city_cardlist_fragment, container, false);
         context = inflater.getContext();
         dbHelper = new DatabaseHelper(context);
@@ -48,8 +52,19 @@ public class CityFragment extends Fragment {
         List<String> cityNames = addressDao.getAllCities();
         String[] cityNamesArray = cityNames.toArray(new String[cityNames.size()]);
 
-        ArrayAdapter adapter = new CityCardAdapter(context, cityNamesArray);
+        ArrayAdapter adapter = new CityCardAdapter(context, cityNamesArray,this);
         cityListView.setAdapter(adapter);
 
+    }
+
+    public void onCardClick(String cardCaption){
+
+       /* int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, cardCaption, duration);
+        toast.show();*/
+
+        MainActivity mainActivity = (MainActivity)getActivity();
+        mainActivity.onFragmentChangeRequest(containerId,new TourFragment());
     }
 }

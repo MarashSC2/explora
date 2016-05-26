@@ -1,4 +1,4 @@
-package explora.de.exploramaterial.MainActivity;
+package explora.de.exploramaterial.CityCard;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -17,11 +17,13 @@ public class CityCardAdapter extends ArrayAdapter<String> {
 
     private Context context;
     private String[] values;
+    private CityCardClickListener cardClickListener;
 
-    public CityCardAdapter(Context context, String[] values) {
+    public CityCardAdapter(Context context, String[] values, CityCardClickListener cardClickListener) {
         super(context, -1, values);
         this.context = context;
         this.values = values;
+        this.cardClickListener = cardClickListener;
     }
 
 
@@ -32,11 +34,18 @@ public class CityCardAdapter extends ArrayAdapter<String> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.city_cardlist_layout, parent, false);
 
-        TextView textView = (TextView) rowView.findViewById(R.id.info_text);
+        final TextView textView = (TextView) rowView.findViewById(R.id.info_text);
         textView.setText(values[position]);
 
-        CardView cardView = (CardView) rowView.findViewById(R.id.card_view);
+        final CardView cardView = (CardView) rowView.findViewById(R.id.card_view);
         cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cardClickListener.onCardClick(textView.getText().toString());
+            }
+        });
 
         return rowView;
     }
