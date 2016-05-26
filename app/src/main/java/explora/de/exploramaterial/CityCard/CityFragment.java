@@ -22,7 +22,7 @@ import explora.de.exploramaterial.database.DatabaseHelper;
 /**
  * Created by Marash on 25.05.2016.
  */
-public class CityFragment extends Fragment implements CityCardClickListener {
+public class CityFragment extends Fragment {
 
     private View rootView;
     private Context context;
@@ -52,19 +52,8 @@ public class CityFragment extends Fragment implements CityCardClickListener {
         List<String> cityNames = addressDao.getAllCities();
         String[] cityNamesArray = cityNames.toArray(new String[cityNames.size()]);
 
-        ArrayAdapter adapter = new CityCardAdapter(context, cityNamesArray,this);
+        ArrayAdapter adapter = new CityCardAdapter(context, cityNamesArray,(CityCardClickListener)getActivity());
         cityListView.setAdapter(adapter);
 
-    }
-
-    public void onCardClick(String cardCaption){
-
-       /* int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, cardCaption, duration);
-        toast.show();*/
-
-        MainActivity mainActivity = (MainActivity)getActivity();
-        mainActivity.onFragmentChangeRequest(containerId,new TourFragment());
     }
 }

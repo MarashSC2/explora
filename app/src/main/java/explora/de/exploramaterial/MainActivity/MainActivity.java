@@ -9,12 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import explora.de.exploramaterial.CityCard.CityCardClickListener;
 import explora.de.exploramaterial.CityCard.CityFragment;
 import explora.de.exploramaterial.R;
 import explora.de.exploramaterial.TourCard.TourFragment;
 import explora.de.exploramaterial.database.DatabaseHelper;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CityCardClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onFragmentChangeRequest(int containerId, Fragment targetFragment){
+    public void changeFragment(int containerId, Fragment targetFragment){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(containerId, targetFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onCityCardClick(String cityName) {
+        TourFragment newTourFragment = new TourFragment();
+        Bundle args = new Bundle();
+        args.putString(TourFragment.ARG_CITY_NAME,cityName);
+        newTourFragment.setArguments(args);
+        changeFragment(R.id.fragment_container,newTourFragment);
     }
 }

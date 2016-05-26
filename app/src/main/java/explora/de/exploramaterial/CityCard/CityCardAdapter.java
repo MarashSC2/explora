@@ -43,7 +43,7 @@ public class CityCardAdapter extends ArrayAdapter<String> {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardClickListener.onCardClick(textView.getText().toString());
+                cardClickListener.onCityCardClick(textView.getText().toString());
             }
         });
 
