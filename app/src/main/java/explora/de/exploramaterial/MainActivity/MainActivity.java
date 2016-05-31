@@ -5,33 +5,41 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.util.Log;
 
-import explora.de.exploramaterial.CityCard.CityCardClickListener;
-import explora.de.exploramaterial.CityCard.CityFragment;
+import java.io.Serializable;
+import java.util.List;
+
+import explora.de.exploramaterial.city.view.CityCardClickListener;
+import explora.de.exploramaterial.city.view.CityCardFragment;
+import explora.de.exploramaterial.tour.entity.Tour;
 import explora.de.exploramaterial.R;
-import explora.de.exploramaterial.TourCard.TourFragment;
+import explora.de.exploramaterial.tour.view.SingleTourFragment;
+import explora.de.exploramaterial.tour.view.TourCardFragment;
+import explora.de.exploramaterial.tour.view.TourCardClickListener;
+import explora.de.exploramaterial.tour.dao.TourDAO;
 import explora.de.exploramaterial.database.DatabaseHelper;
 
-public class MainActivity extends AppCompatActivity implements CityCardClickListener{
+public class MainActivity extends AppCompatActivity implements CityCardClickListener, TourCardClickListener {
+
+    public static DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        databaseHelper = new DatabaseHelper(this.getApplicationContext());
+
         if (findViewById(R.id.fragment_container) != null) {
 
             if (savedInstanceState != null) {
                 return;
             }
-            CityFragment cityFragment = new CityFragment();
+            CityCardFragment cityFragment = new CityCardFragment();
             getFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, cityFragment).commit();
         }
-
     }
 
     public void changeFragment(int containerId, Fragment targetFragment){
@@ -43,10 +51,29 @@ public class MainActivity extends AppCompatActivity implements CityCardClickList
     }
 
     @Override
-    public void onCityCardClick(String cityName) {
-        TourFragment newTourFragment = new TourFragment();
+    public void onCityCardClick(int tourId) {
+        TourDAO tourDao = new TourDAO(databaseHelper);
+        List<Tour> tours = tourDao.getAllTours();
+        Log.d("Tour: ", tours.toString());
+
+        TourCardFragment topTourFragment = new TourCardFragment();
+        changeFragment(R.id.fragment_container, topTourFragment);
+    }
+
+    @Override
+    public void onTourCardClick(int tourId) {
+        TourDAO tourDao = new TourDAO(databaseHelper);
+        List<Tour> tours = tourDao.getAllTours();
+        Log.d("Tour: ", tours.toString());
+        Tour tour = tourDao.findById(1);
+        if (tour == null){
+            Log.d("Tour: ", "tour: ");
+            return;
+        }
+        SingleTourFragment newTourFragment = new SingleTourFragment();
         Bundle args = new Bundle();
-        args.putString(TourFragment.ARG_CITY_NAME,cityName);
+
+        args.putSerializable(SingleTourFragment.ARG_TOUR, (Serializable)tour);
         newTourFragment.setArguments(args);
         changeFragment(R.id.fragment_container,newTourFragment);
     }

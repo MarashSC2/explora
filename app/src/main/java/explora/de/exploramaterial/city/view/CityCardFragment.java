@@ -1,4 +1,4 @@
-package explora.de.exploramaterial.CityCard;
+package explora.de.exploramaterial.city.view;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -9,25 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import explora.de.exploramaterial.MainActivity.MainActivity;
 import explora.de.exploramaterial.R;
-import explora.de.exploramaterial.TourCard.TourFragment;
-import explora.de.exploramaterial.dao.AddressDAO;
-import explora.de.exploramaterial.database.DatabaseHelper;
+import explora.de.exploramaterial.address.dao.AddressDAO;
 
 /**
  * Created by Marash on 25.05.2016.
  */
-public class CityFragment extends Fragment {
+public class CityCardFragment extends Fragment {
 
     private View rootView;
     private Context context;
-    private DatabaseHelper dbHelper;
-
     private int containerId;
 
     @Nullable
@@ -36,7 +31,6 @@ public class CityFragment extends Fragment {
         containerId = container.getId();
         rootView = inflater.inflate(R.layout.city_cardlist_fragment, container, false);
         context = inflater.getContext();
-        dbHelper = new DatabaseHelper(context);
 
         return rootView;
     }
@@ -47,13 +41,12 @@ public class CityFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ListView cityListView = (ListView) rootView.findViewById(R.id.city_list_view_fragment);
 
-        AddressDAO addressDao = new AddressDAO(new DatabaseHelper(getActivity().getApplicationContext()));
+        AddressDAO addressDao = new AddressDAO(MainActivity.databaseHelper);
 
         List<String> cityNames = addressDao.getAllCities();
         String[] cityNamesArray = cityNames.toArray(new String[cityNames.size()]);
 
         ArrayAdapter adapter = new CityCardAdapter(context, cityNamesArray,(CityCardClickListener)getActivity());
         cityListView.setAdapter(adapter);
-
     }
 }

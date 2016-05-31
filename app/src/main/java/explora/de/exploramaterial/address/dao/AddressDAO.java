@@ -1,14 +1,11 @@
-package explora.de.exploramaterial.dao;
+package explora.de.exploramaterial.address.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import explora.de.exploramaterial.Entity.Address;
 import explora.de.exploramaterial.database.DatabaseConstants;
 import explora.de.exploramaterial.database.DatabaseHelper;
 

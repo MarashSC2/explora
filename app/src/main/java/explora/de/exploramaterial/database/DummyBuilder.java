@@ -3,8 +3,9 @@ package explora.de.exploramaterial.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import explora.de.exploramaterial.Entity.Address;
-import explora.de.exploramaterial.Entity.User;
+import explora.de.exploramaterial.address.entity.Address;
+import explora.de.exploramaterial.tour.entity.Tour;
+import explora.de.exploramaterial.user.entity.User;
 
 /**
  * Created by Marash on 25.05.2016.
@@ -33,5 +34,15 @@ public class DummyBuilder {
         addresses.add(new Address(6,"Vereinigtes Königreich","London","Wilton Pl","SW1X 7RL"));
 
         return addresses;
+    }
+
+    public List<Tour> getDummyTours (){
+        List<Tour> tours = new ArrayList<>();
+        tours.add(new Tour(1, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 1));
+        tours.add(new Tour(2, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 1));
+        tours.add(new Tour(3, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 4));
+        tours.add(new Tour(4, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 4));
+        tours.add(new Tour(5, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 6));
+        return tours;
     }
 }

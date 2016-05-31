@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+     android:layout_margin="8dp"
+     android:paddingTop="20dp">
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/card_margin">
+
+  <LinearLayout
+      android:orientation="vertical"
+      android:padding="18dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+   <ImageView
+       android:id="@+id/image"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:src="@mipmap/berlin" />
+
+  </LinearLayout>
+  </android.support.v7.widget.CardView>
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/card_margin">
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:padding="18dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="Datum" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="29.05.2016"
+        android:textColor="@color/twoh_primary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+   </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/card_margin"
+      android:layout_marginLeft="@dimen/card_margin"
+      android:layout_marginRight="@dimen/card_margin">
+
+   <LinearLayout
+       android:padding="18dp"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="Uhrzeit" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="17:00 Uhr"
+        android:textColor="@color/twoh_primary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+   </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/card_margin"
+      android:layout_marginLeft="@dimen/card_margin"
+      android:layout_marginRight="@dimen/card_margin">
+
+   <LinearLayout
+       android:padding="18dp"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="Treffpunkt" />
+
+    <TextView
+        android:id="@+id/meeting_spot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Güntherklotz Anlage"
+        android:textColor="@color/twoh_primary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+   </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/card_margin"
+      android:layout_marginLeft="@dimen/card_margin"
+      android:layout_marginRight="@dimen/card_margin"
+      >
+
+   <LinearLayout
+       android:padding="18dp"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="Reiseführer" />
+
+    <TextView
+        android:id="@+id/tour_guide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Franz Ferdinand"
+        android:textColor="@color/twoh_primary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+   </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/card_margin"
+      android:layout_marginLeft="@dimen/card_margin"
+      android:layout_marginRight="@dimen/card_margin"
+      >
+
+   <LinearLayout
+       android:padding="18dp"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="Wunderschöne Tour durch die Straßen von Berlin. Ist jedem zu empfehlen der gerne auf seinen Füßen unterwegs ist." />
+
+   </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/card_margin"
+      android:layout_marginLeft="@dimen/card_margin"
+      android:layout_marginRight="@dimen/card_margin"
+      >
+
+   <LinearLayout
+       android:padding="18dp"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buchen für 25€"
+        android:textColor="@color/twoh_primary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+   </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+ <android.support.v7.widget.CardView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginBottom="@dimen/card_margin"
+     android:layout_marginLeft="@dimen/card_margin"
+     android:layout_marginRight="@dimen/card_margin"
+     >
+
+  <LinearLayout
+      android:padding="18dp"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textColor="#000000"
+       android:text="Bewertungen" />
+
+  <RelativeLayout
+      android:padding="18dp"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+   <ImageView
+       android:id="@+id/icon"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:src="@drawable/ic_person_black_24dp" />
+
+   <TextView
+       android:id="@+id/rating"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textColor="#000000"
+       android:background="@color/comment_textField"
+       android:text="Bewertungen"
+       android:layout_alignRight="@id/icon"/>
+
+  </RelativeLayout>
+
+  </LinearLayout>
+
+ </android.support.v7.widget.CardView>
+
+ </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
