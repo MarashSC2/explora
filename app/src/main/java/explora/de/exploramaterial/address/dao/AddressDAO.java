@@ -1,14 +1,12 @@
-package explora.de.exploramaterial.dao;
+package explora.de.exploramaterial.address.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import explora.de.exploramaterial.Entity.Address;
+import explora.de.exploramaterial.address.entity.Address;
 import explora.de.exploramaterial.database.DatabaseConstants;
 import explora.de.exploramaterial.database.DatabaseHelper;
 
@@ -23,8 +21,8 @@ public class AddressDAO {
         database = databaseHelper.getWritableDatabase();
     }
 
-    public List<String> getAllCities() {
-        List<String> cityNames = new ArrayList<>();
+    public List<Address> getAllAddresses() {
+        List<Address> addresses = new ArrayList<>();
 
         String[] projection = {
                 DatabaseConstants.AddressEntry.COLUMN_NAME_CITY
@@ -41,14 +39,13 @@ public class AddressDAO {
         );
 
         if(cursor.getCount() <1){
-            return cityNames;
+            return addresses;
         }
 
         while(cursor.moveToNext()){
-            String cityName = cursor.getString(cursor.getColumnIndex(DatabaseConstants.AddressEntry.COLUMN_NAME_CITY));
-            cityNames.add(cityName);
+            addresses.add(new Address(cursor.getString(cursor.getColumnIndex(DatabaseConstants.AddressEntry.COLUMN_NAME_CITY))));
         }
 
-        return cityNames;
+        return addresses;
     }
 }

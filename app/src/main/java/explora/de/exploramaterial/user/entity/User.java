@@ -1,13 +1,14 @@
-package explora.de.exploramaterial.Entity;
+package explora.de.exploramaterial.user.entity;
 
 import android.content.ContentValues;
 
+import explora.de.exploramaterial.database.entity.Entity;
 import explora.de.exploramaterial.database.DatabaseConstants;
 
 /**
  * Created by Marash on 25.05.2016.
  */
-public class User implements Entity{
+public class User implements Entity {
 
     private int id;
     private String email;

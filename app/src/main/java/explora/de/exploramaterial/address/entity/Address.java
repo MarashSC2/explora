@@ -1,7 +1,8 @@
-package explora.de.exploramaterial.Entity;
+package explora.de.exploramaterial.address.entity;
 
 import android.content.ContentValues;
 
+import explora.de.exploramaterial.database.entity.Entity;
 import explora.de.exploramaterial.database.DatabaseConstants;
 
 /**
@@ -15,7 +16,11 @@ public class Address implements Entity {
     private String street;
     private String zipCode;
 
-    public Address(int id,String country, String city, String street, String zipCode) {
+    public Address(String city) {
+        this.city = city;
+    }
+
+    public Address(int id, String country, String city, String street, String zipCode) {
         this.id = id;
         this.country = country;
         this.city = city;

@@ -1,11 +1,11 @@
-package explora.de.exploramaterial.dao;
+package explora.de.exploramaterial.user.dao;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
 import explora.de.exploramaterial.database.DatabaseConstants;
 import explora.de.exploramaterial.database.DatabaseHelper;
-import explora.de.exploramaterial.Entity.User;
+import explora.de.exploramaterial.user.entity.User;
 
 /**
  * Created by Marash on 25.05.2016.

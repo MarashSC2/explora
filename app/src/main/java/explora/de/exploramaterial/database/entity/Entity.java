@@ -1,4 +1,4 @@
-package explora.de.exploramaterial.Entity;
+package explora.de.exploramaterial.database.entity;
 
 import android.content.ContentValues;
 
