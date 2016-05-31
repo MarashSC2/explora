@@ -61,20 +61,16 @@ public class MainActivity extends AppCompatActivity implements CityCardClickList
     }
 
     @Override
-    public void onTourCardClick(int tourId) {
-        TourDAO tourDao = new TourDAO(databaseHelper);
-        List<Tour> tours = tourDao.getAllTours();
-        Log.d("Tour: ", tours.toString());
-        Tour tour = tourDao.findById(1);
+    public void onTourCardClick(Tour tour) {
         if (tour == null){
             Log.d("Tour: ", "tour: ");
             return;
         }
-        SingleTourFragment newTourFragment = new SingleTourFragment();
-        Bundle args = new Bundle();
 
+        SingleTourFragment singleTourFragment = new SingleTourFragment();
+        Bundle args = new Bundle();
         args.putSerializable(SingleTourFragment.ARG_TOUR, (Serializable)tour);
-        newTourFragment.setArguments(args);
-        changeFragment(R.id.fragment_container,newTourFragment);
+        singleTourFragment.setArguments(args);
+        changeFragment(R.id.fragment_container, singleTourFragment);
     }
 }

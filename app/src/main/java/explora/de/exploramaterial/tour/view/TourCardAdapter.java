@@ -47,7 +47,7 @@ public class TourCardAdapter extends ArrayAdapter<Tour> {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tourCardClickListener.onTourCardClick(id);
+                tourCardClickListener.onTourCardClick(tours.get(id));
             }
         });
 

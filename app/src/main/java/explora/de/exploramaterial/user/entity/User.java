@@ -2,7 +2,7 @@ package explora.de.exploramaterial.user.entity;
 
 import android.content.ContentValues;
 
-import explora.de.exploramaterial.entity.Entity;
+import explora.de.exploramaterial.database.entity.Entity;
 import explora.de.exploramaterial.database.DatabaseConstants;
 
 /**

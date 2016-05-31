@@ -2,13 +2,15 @@ package explora.de.exploramaterial.tour.entity;
 
 import android.content.ContentValues;
 
-import explora.de.exploramaterial.entity.Entity;
+import java.io.Serializable;
+
+import explora.de.exploramaterial.database.entity.Entity;
 import explora.de.exploramaterial.database.DatabaseConstants;
 
 /**
  * Created by Andi on 25.05.2016.
  */
-public class Tour implements Entity {
+public class Tour implements Entity, Serializable {
 
     private int id;
     private String dateTime;
