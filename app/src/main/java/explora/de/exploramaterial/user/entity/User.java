@@ -15,21 +15,24 @@ public class User implements Entity {
     private String name;
     private String password;
 
-    public User(int id,String email, String name, String password) {
+    public User(int id, String email, String name, String password) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.password = password;
     }
 
-    public ContentValues getContentValues(){
-        ContentValues values = new ContentValues();
+    public User(String email, String password, String name) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+    }
 
-        values.put(DatabaseConstants.UserEntry._ID, id);
+    public ContentValues getContentValues() {
+        ContentValues values = new ContentValues();
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_NAME, name);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_MAIL, email);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_PASSWORD, password);
-        values.put(DatabaseConstants.UserEntry._ID, id);
         return values;
     }
 

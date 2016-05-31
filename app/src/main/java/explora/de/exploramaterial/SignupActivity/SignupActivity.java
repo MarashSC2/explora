@@ -16,10 +16,13 @@ import explora.de.exploramaterial.MainActivity.MainActivity;
 import explora.de.exploramaterial.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import explora.de.exploramaterial.user.entity.User;
+import explora.de.exploramaterial.user.service.UserService;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
     public static final String PREFS_LOGIN = "login_prefs";
+    private UserService userService;
 
     @InjectView(R.id.input_name) EditText _nameText;
     @InjectView(R.id.input_email) EditText _emailText;
@@ -33,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         ButterKnife.inject(this);
 
+        userService=new UserService(getApplicationContext());
         _signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,22 +68,23 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        final String name = _nameText.getText().toString();
+        final String email = _emailText.getText().toString();
+        final String password = _passwordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
+                        if(userService.signUp(new User(email,password,name))){
+                            onSignupSuccess();
+                        }else{
+                            onSignupFailed();
+                        }
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 1000);
     }
 
 
@@ -98,7 +103,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Email exists", Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }

@@ -14,9 +14,9 @@ public class DummyBuilder {
 
     public List<User> getDummyUsers (){
         List<User> users = new ArrayList<>();
-        users.add(new User(1,"admin@admin.de","Admin","padmin"));
-        users.add(new User(2,"guide@admin.de","Guide","pguide"));
-        users.add(new User(3,"kunde@admin.de","Kunde","pkunde"));
+        users.add(new User("admin@admin.de","Admin","padmin"));
+        users.add(new User("guide@admin.de","Guide","pguide"));
+        users.add(new User("kunde@admin.de","Kunde","pkunde"));
 
         return users;
     }

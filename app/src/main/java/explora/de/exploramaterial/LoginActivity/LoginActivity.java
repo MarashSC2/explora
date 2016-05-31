@@ -26,12 +26,15 @@ import explora.de.exploramaterial.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import explora.de.exploramaterial.MainActivity.MainActivity;
+import explora.de.exploramaterial.user.entity.User;
+import explora.de.exploramaterial.user.service.UserService;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String PREFS_LOGIN = "login_prefs";
 
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private UserService userService;
 
     @InjectView(R.id.input_email) EditText _emailText;
     @InjectView(R.id.input_password) EditText _passwordText;
@@ -51,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
-
+        userService=new UserService(getApplicationContext());
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -88,20 +91,25 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        final String email = _emailText.getText().toString();
+        final String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
+
+        //
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+                        if(userService.isLoginCorrect(new User(email,password,null))){
+                            onLoginSuccess();
+                        }else{
+                            onLoginFailed();
+                        }
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 1000);
 
     }
 
