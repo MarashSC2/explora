@@ -71,5 +71,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             database.insert(DatabaseConstants.TourEntry.TABLE_NAME, null, values);
         }
     }
-
 }

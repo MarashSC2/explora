@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  */
 public class DatabaseConstants {
 
-    public static int DB_VERSION = 2;
+    public static int DB_VERSION = 3;
     public static final String DB_NAME = "explora.db";
     public static final String COMMA_SEP = ",";
     public static final String CREATE_TABLE = "CREATE TABLE ";

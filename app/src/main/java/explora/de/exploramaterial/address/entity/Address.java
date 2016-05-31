@@ -16,6 +16,10 @@ public class Address implements Entity {
     private String street;
     private String zipCode;
 
+    public Address(String city) {
+        this.city = city;
+    }
+
     public Address(int id, String country, String city, String street, String zipCode) {
         this.id = id;
         this.country = country;

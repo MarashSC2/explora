@@ -38,11 +38,11 @@ public class DummyBuilder {
 
     public List<Tour> getDummyTours (){
         List<Tour> tours = new ArrayList<>();
-        tours.add(new Tour(1, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 1));
-        tours.add(new Tour(2, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 1));
-        tours.add(new Tour(3, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 4));
-        tours.add(new Tour(4, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 4));
-        tours.add(new Tour(5, "29.05.2016 15:00", "Berlin", "Ursula", 50, "Nottingham Forest", "Schöne Umgebung", "Gut", 6));
+        tours.add(new Tour(1, "29.05.2016 15:00", "Neuler", "Ursula", 50, "Neuler", "Schöne Umgebung", "Gut", 1));
+        tours.add(new Tour(2, "29.05.2016 15:00", "Stuttgart", "Ursula", 50, "Stuttgart", "Schöne Umgebung", "Gut", 1));
+        tours.add(new Tour(3, "29.05.2016 15:00", "Karlsruhe Forest", "Ursula", 50, "Karlsruhe Forest", "Schöne Umgebung", "Gut", 4));
+        tours.add(new Tour(4, "29.05.2016 15:00", "Durlach", "Ursula", 50, "Durlach", "Schöne Umgebung", "Gut", 4));
+        tours.add(new Tour(5, "29.05.2016 15:00", "Schwarzwald", "Ursula", 50, "Schwarzwald", "Schöne Umgebung", "Gut", 6));
         return tours;
     }
 }

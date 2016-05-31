@@ -96,4 +96,35 @@ public class TourDAO {
 
         return tours;
     }
+
+    public List<Tour> findByCity(String city) {
+        List<Tour> tours = new ArrayList<>();
+
+        Cursor cursor = database.query(
+                DatabaseConstants.TourEntry.TABLE_NAME,
+                projection,
+                "meetingSpot = ?",
+                new String[] { String.valueOf(city) },
+                null,
+                null,
+                null,
+                null
+        );
+
+        while(cursor.moveToNext()){
+            String id = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry._ID));
+            String dateTime = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_DATETIME));
+            String meetingSpot = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_MEETING_SPOT));
+            String tourGuide = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_TOUR_GUIDE));
+            String price = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_PRICE));
+            String title = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_TITLE));
+            String description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_DESCRIPTION));
+            String rating = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_RATING));
+            String address = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS));
+
+            tours.add(new Tour (Integer.parseInt(id), dateTime, meetingSpot, tourGuide, Integer.parseInt(price), title, description, rating, Integer.parseInt(address)));
+        }
+
+        return tours;
+    }
 }

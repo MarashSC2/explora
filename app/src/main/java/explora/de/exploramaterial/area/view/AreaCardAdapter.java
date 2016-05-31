@@ -1,4 +1,4 @@
-package explora.de.exploramaterial.city.view;
+package explora.de.exploramaterial.area.view;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -8,21 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 import explora.de.exploramaterial.R;
+import explora.de.exploramaterial.address.entity.Address;
 
 /**
  * Created by Marash on 25.05.2016.
  */
-public class CityCardAdapter extends ArrayAdapter<String> {
+public class AreaCardAdapter extends ArrayAdapter<Address> {
 
     private Context context;
-    private String[] values;
-    private CityCardClickListener cardClickListener;
+    private List<Address> addresses;
+    private AreaCardClickListener cardClickListener;
 
-    public CityCardAdapter(Context context, String[] values, CityCardClickListener cardClickListener) {
-        super(context, -1, values);
+    public AreaCardAdapter(Context context, List<Address> addresses, AreaCardClickListener cardClickListener) {
+        super(context, -1, addresses);
         this.context = context;
-        this.values = values;
+        this.addresses = addresses;
         this.cardClickListener = cardClickListener;
     }
 
@@ -36,7 +39,7 @@ public class CityCardAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.city_cardlist_layout, parent, false);
 
         final TextView textView = (TextView) rowView.findViewById(R.id.info_text);
-        textView.setText(values[position]);
+        textView.setText(this.addresses.get(position).getCity());
 
         final CardView cardView = (CardView) rowView.findViewById(R.id.card_view);
         cardView.setCardBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
@@ -44,7 +47,7 @@ public class CityCardAdapter extends ArrayAdapter<String> {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardClickListener.onCityCardClick(id);
+                cardClickListener.onAreaCardClick(addresses.get(id));
             }
         });
 

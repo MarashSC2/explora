@@ -1,4 +1,4 @@
-package explora.de.exploramaterial.city.view;
+package explora.de.exploramaterial.area.view;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -15,11 +15,12 @@ import java.util.List;
 import explora.de.exploramaterial.MainActivity.MainActivity;
 import explora.de.exploramaterial.R;
 import explora.de.exploramaterial.address.dao.AddressDAO;
+import explora.de.exploramaterial.address.entity.Address;
 
 /**
  * Created by Marash on 25.05.2016.
  */
-public class CityCardFragment extends Fragment {
+public class AreaCardFragment extends Fragment {
 
     private View rootView;
     private Context context;
@@ -43,10 +44,9 @@ public class CityCardFragment extends Fragment {
 
         AddressDAO addressDao = new AddressDAO(MainActivity.databaseHelper);
 
-        List<String> cityNames = addressDao.getAllCities();
-        String[] cityNamesArray = cityNames.toArray(new String[cityNames.size()]);
+        List<Address> addresses = addressDao.getAllAddresses();
 
-        ArrayAdapter adapter = new CityCardAdapter(context, cityNamesArray,(CityCardClickListener)getActivity());
+        ArrayAdapter adapter = new AreaCardAdapter(context, addresses,(AreaCardClickListener)getActivity());
         cityListView.setAdapter(adapter);
     }
 }
