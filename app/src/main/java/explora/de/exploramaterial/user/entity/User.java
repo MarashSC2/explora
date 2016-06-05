@@ -15,6 +15,10 @@ public class User implements Entity {
     private String name;
     private String password;
 
+    public User(){
+
+    }
+
     public User(int id, String email, String name, String password) {
         this.id = id;
         this.email = email;
@@ -30,6 +34,7 @@ public class User implements Entity {
 
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
+        values.put(DatabaseConstants.TourEntry._ID, id);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_NAME, name);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_MAIL, email);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_PASSWORD, password);

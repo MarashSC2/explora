@@ -14,9 +14,9 @@ public class DummyBuilder {
 
     public List<User> getDummyUsers (){
         List<User> users = new ArrayList<>();
-        users.add(new User("admin@admin.de","Admin","padmin"));
-        users.add(new User("guide@admin.de","Guide","pguide"));
-        users.add(new User("kunde@admin.de","Kunde","pkunde"));
+        users.add(new User(1,"admin@admin.de","Admin","padmin"));
+        users.add(new User(2,"guide@admin.de","Guide","pguide"));
+        users.add(new User(3,"kunde@admin.de","Kunde","pkunde"));
 
         return users;
     }
@@ -38,11 +38,11 @@ public class DummyBuilder {
 
     public List<Tour> getDummyTours (){
         List<Tour> tours = new ArrayList<>();
-        tours.add(new Tour(1, "29.05.2016 15:00", "Neuler", "Ursula", 50, "Neuler", "Schöne Umgebung", "Gut", 1));
-        tours.add(new Tour(2, "29.05.2016 15:00", "Stuttgart", "Ursula", 50, "Stuttgart", "Schöne Umgebung", "Gut", 1));
-        tours.add(new Tour(3, "29.05.2016 15:00", "Karlsruhe Forest", "Ursula", 50, "Karlsruhe Forest", "Schöne Umgebung", "Gut", 4));
-        tours.add(new Tour(4, "29.05.2016 15:00", "Durlach", "Ursula", 50, "Durlach", "Schöne Umgebung", "Gut", 4));
-        tours.add(new Tour(5, "29.05.2016 15:00", "Schwarzwald", "Ursula", 50, "Schwarzwald", "Schöne Umgebung", "Gut", 6));
+        tours.add(new Tour(1, "29.05.2016 15:00", "Neuler", "Ursula", 50, "Neuler", "Schöne Umgebung", "Gut", 1,1));
+        tours.add(new Tour(2, "29.05.2016 15:00", "Stuttgart", "Ursula", 50, "Stuttgart", "Schöne Umgebung", "Gut", 1,1));
+        tours.add(new Tour(3, "29.05.2016 15:00", "Karlsruhe Forest", "Ursula", 50, "Karlsruhe Forest", "Schöne Umgebung", "Gut", 4,2));
+        tours.add(new Tour(4, "29.05.2016 15:00", "Durlach", "Ursula", 50, "Durlach", "Schöne Umgebung", "Gut", 4,2));
+        tours.add(new Tour(5, "29.05.2016 15:00", "Schwarzwald", "Ursula", 50, "Schwarzwald", "Schöne Umgebung", "Gut", 6,3));
         return tours;
     }
 }

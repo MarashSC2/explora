@@ -50,7 +50,7 @@
         android:textColor="#000000"
         android:text="Datum" />
 
-    <TextView
+    <EditText
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
         android:textColor="#000000"
         android:text="Uhrzeit" />
 
-    <TextView
+    <EditText
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
         android:textColor="#000000"
         android:text="Treffpunkt" />
 
-    <TextView
+    <EditText
         android:id="@+id/meeting_spot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
         android:textColor="#000000"
         android:text="Reiseführer" />
 
-    <TextView
+    <EditText
         android:id="@+id/tour_guide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -171,6 +171,12 @@
        android:layout_height="wrap_content">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="Beschreibung" />
+
+    <EditText
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -230,26 +236,26 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
-   <ImageView
-       android:id="@+id/icon"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:src="@drawable/ic_person_black_24dp" />
 
-   <TextView
+
+   <EditText
        android:id="@+id/rating"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:textColor="#000000"
-       android:background="@color/comment_textField"
-       android:text="Bewertungen"
-       android:layout_alignRight="@id/icon"/>
+       android:text="Bewertungen" />
 
   </RelativeLayout>
 
   </LinearLayout>
 
  </android.support.v7.widget.CardView>
+
+  <Button
+      android:id="@+id/saveButton"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:text="Speichern"/>
 
  </LinearLayout>
 

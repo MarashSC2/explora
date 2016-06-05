@@ -1,5 +1,6 @@
 package explora.de.exploramaterial.tour.dao;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -29,8 +30,29 @@ public class TourDAO {
                 DatabaseConstants.TourEntry.COLUMN_NAME_TITLE,
                 DatabaseConstants.TourEntry.COLUMN_NAME_DESCRIPTION,
                 DatabaseConstants.TourEntry.COLUMN_NAME_RATING,
-                DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS
+                DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS,
+                DatabaseConstants.TourEntry.COLUMN_NAME_OWNER
+
         };
+    }
+
+    public boolean saveTour(Tour tour){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_DATETIME, tour.getDateTime());
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_MEETING_SPOT, tour.getMeetingSpot());
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_TOUR_GUIDE, tour.getTourGuide());
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_PRICE, tour.getPrice());
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_TITLE, tour.getTitle());
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_DESCRIPTION, tour.getDescription());
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_RATING, tour.getRating());
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS, tour.getAddress());
+        contentValues.put( DatabaseConstants.TourEntry.COLUMN_NAME_OWNER, tour.getOwner());
+        database.update(  DatabaseConstants.TourEntry.TABLE_NAME, contentValues, DatabaseConstants.TourEntry._ID + " = ? ", new String[] { Integer.toString(tour.getId()) } );
+        return true;
+    }
+    public boolean createTour(Tour tour) {
+        ContentValues values = tour.getContentValues();
+        return database.insert(DatabaseConstants.TourEntry.TABLE_NAME, null, values) > -1;
     }
 
     public Tour findById(int id){
@@ -90,8 +112,9 @@ public class TourDAO {
             String description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_DESCRIPTION));
             String rating = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_RATING));
             String address = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS));
+            String userId =  cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_OWNER));
 
-            tours.add(new Tour (Integer.parseInt(id), dateTime, meetingSpot, tourGuide, Integer.parseInt(price), title, description, rating, Integer.parseInt(address)));
+            tours.add(new Tour (Integer.parseInt(id), dateTime, meetingSpot, tourGuide, Integer.parseInt(price), title, description, rating, Integer.parseInt(address),Integer.parseInt(userId)));
         }
 
         return tours;
@@ -121,8 +144,9 @@ public class TourDAO {
             String description = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_DESCRIPTION));
             String rating = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_RATING));
             String address = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS));
+            String userId =  cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry.COLUMN_NAME_OWNER));
 
-            tours.add(new Tour (Integer.parseInt(id), dateTime, meetingSpot, tourGuide, Integer.parseInt(price), title, description, rating, Integer.parseInt(address)));
+            tours.add(new Tour (Integer.parseInt(id), dateTime, meetingSpot, tourGuide, Integer.parseInt(price), title, description, rating, Integer.parseInt(address),Integer.parseInt(userId)));
         }
 
         return tours;

@@ -31,8 +31,33 @@ public class UserDAO {
         };
     }
 
-    public User findById(){
-        return null;
+    public User findById(int id){
+        User user = new User();
+
+        Cursor cursor = database.query(
+                DatabaseConstants.UserEntry.TABLE_NAME,
+                projection,
+                "_id = ?",
+                new String[] { String.valueOf(id) },
+                null,
+                null,
+                null,
+                null
+        );
+
+        if(cursor.getCount() <1){
+            return user;
+        }
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        user.setId(Integer.parseInt(cursor.getString(0)));
+        user.setEmail(cursor.getString(1));
+        user.setName(cursor.getString(2));
+        user.setPassword(cursor.getString(3));
+
+        return user;
     }
 
     public String findPasswordByEMail(String email){
@@ -61,6 +86,35 @@ public class UserDAO {
         }
         return users.get(0).getEmail();
 
+    }
+
+    public User findByEmail(String email){
+        User user = new User();
+
+        Cursor cursor = database.query(
+                DatabaseConstants.UserEntry.TABLE_NAME,
+                projection,
+                "mail = ?",
+                new String[] { email },
+                null,
+                null,
+                null,
+                null
+        );
+
+        if(cursor.getCount() <1){
+            return user;
+        }
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        user.setId(Integer.parseInt(cursor.getString(0)));
+        user.setEmail(cursor.getString(1));
+        user.setName(cursor.getString(2));
+        user.setPassword(cursor.getString(3));
+
+        return user;
     }
 
     public boolean save(User user){

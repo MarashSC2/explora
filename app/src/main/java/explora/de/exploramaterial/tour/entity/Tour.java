@@ -21,10 +21,11 @@ public class Tour implements Entity, Serializable {
     private String description;
     private String rating;
     private int address;
+    private int owner;
 
     public Tour(){}
 
-    public Tour(int id, String dateTime, String meetingSpot, String tourGuide, int price, String title, String description, String rating, int address) {
+    public Tour(int id, String dateTime, String meetingSpot, String tourGuide, int price, String title, String description, String rating, int address,int owner) {
         this.id = id;
         this.dateTime = dateTime;
         this.meetingSpot = meetingSpot;
@@ -34,6 +35,7 @@ public class Tour implements Entity, Serializable {
         this.description = description;
         this.rating = rating;
         this.address = address;
+        this.owner = owner;
     }
 
     @Override
@@ -49,6 +51,7 @@ public class Tour implements Entity, Serializable {
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_DESCRIPTION, description);
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_RATING, rating);
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS, address);
+        values.put(DatabaseConstants.TourEntry.COLUMN_NAME_OWNER, owner);
 
         return values;
     }
@@ -124,4 +127,8 @@ public class Tour implements Entity, Serializable {
     public void setAddress(int address) {
         this.address = address;
     }
+
+    public int getOwner(){return this.owner;}
+
+    public void setOwner(int owner){this.owner = owner;}
 }

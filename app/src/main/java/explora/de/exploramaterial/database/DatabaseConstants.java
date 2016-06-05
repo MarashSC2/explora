@@ -36,7 +36,8 @@ public class DatabaseConstants {
                     TourEntry.COLUMN_NAME_TITLE + TEXT + NOT_NULL + COMMA_SEP +
                     TourEntry.COLUMN_NAME_DESCRIPTION + TEXT + NOT_NULL + COMMA_SEP +
                     TourEntry.COLUMN_NAME_RATING + TEXT + NOT_NULL + COMMA_SEP +
-                    TourEntry.COLUMN_NAME_ADDRESS + INTEGER + NOT_NULL + ");";
+                    TourEntry.COLUMN_NAME_ADDRESS + INTEGER + NOT_NULL + COMMA_SEP +
+                    TourEntry.COLUMN_NAME_OWNER + INTEGER + NOT_NULL + ");";
 
     public static final String SQL_CREATE_ENTRIES_3 =
             CREATE_TABLE + AddressEntry.TABLE_NAME + " (" +
@@ -65,6 +66,7 @@ public class DatabaseConstants {
         public static final String COLUMN_NAME_DESCRIPTION = "beschreibung";
         public static final String COLUMN_NAME_RATING = "rating";
         public static final String COLUMN_NAME_ADDRESS = "address";
+        public static final String COLUMN_NAME_OWNER = "owner";
     }
 
     public static class AddressEntry implements BaseColumns {

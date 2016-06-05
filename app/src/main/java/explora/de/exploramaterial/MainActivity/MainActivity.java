@@ -24,6 +24,7 @@ import explora.de.exploramaterial.area.view.AreaCardClickListener;
 import explora.de.exploramaterial.area.view.AreaCardFragment;
 import explora.de.exploramaterial.tour.entity.Tour;
 import explora.de.exploramaterial.R;
+import explora.de.exploramaterial.tour.view.CreateTourFragment;
 import explora.de.exploramaterial.tour.view.SingleTourFragment;
 import explora.de.exploramaterial.tour.view.TourCardFragment;
 import explora.de.exploramaterial.tour.view.TourCardClickListener;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
 
     public static final String PREFS_LOGIN = "login_prefs";
     private static final String TAG = "Main Activity";
+    private String currentUser ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
         setContentView(R.layout.activity_main);
 
         SharedPreferences settings = getSharedPreferences(PREFS_LOGIN, 0);
-        Log.d(TAG,"login string: "+settings.getString("logged", "").toString());
+        currentUser = settings.getString("userName","");
+        Log.d(TAG,"login string: "+settings.getString("logged", "").toString()+" User:"+currentUser);
 
             if(!settings.getString("logged", "").toString().equals("logged")){
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
         List<Tour> tours = tourDao.findByCity(address.getCity());
         TourCardFragment topTourFragment = new TourCardFragment();
         Bundle args = new Bundle();
+        args.putString(SingleTourFragment.ARG_USER, currentUser);
         args.putSerializable(SingleTourFragment.ARG_TOUR, (Serializable)tours);
         topTourFragment.setArguments(args);
         changeFragment(R.id.fragment_container, topTourFragment);
@@ -94,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
 
         SingleTourFragment singleTourFragment = new SingleTourFragment();
         Bundle args = new Bundle();
+        args.putString(SingleTourFragment.ARG_USER, currentUser);
         args.putSerializable(SingleTourFragment.ARG_TOUR, (Serializable)tour);
         singleTourFragment.setArguments(args);
         changeFragment(R.id.fragment_container, singleTourFragment);
@@ -110,6 +115,12 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
         // Handle action bar actions click
         switch (item.getItemId()) {
             case R.id.action_settings:
+
+                CreateTourFragment createTourFragment = new CreateTourFragment();
+                Bundle args = new Bundle();
+                args.putString(SingleTourFragment.ARG_USER, currentUser);
+                createTourFragment.setArguments(args);
+                changeFragment(R.id.fragment_container, createTourFragment);
                /* Intent myIntent = new Intent(this, SettingsActivity.class);
                 //myIntent.putExtra("key", value); //Optional parameters
                 this.startActivity(myIntent);
