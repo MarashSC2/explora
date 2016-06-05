@@ -1,39 +1,43 @@
 package explora.de.exploramaterial.MainActivity;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-import explora.de.exploramaterial.LoginActivity.LoginActivity;
+import android.view.View;
 
 import java.io.Serializable;
 import java.util.List;
 
+import explora.de.exploramaterial.LoginActivity.LoginActivity;
+import explora.de.exploramaterial.NavigationDraw.FragmentDrawer;
+import explora.de.exploramaterial.R;
 import explora.de.exploramaterial.address.entity.Address;
 import explora.de.exploramaterial.area.view.AreaCardClickListener;
 import explora.de.exploramaterial.area.view.AreaCardFragment;
+import explora.de.exploramaterial.database.DatabaseHelper;
+import explora.de.exploramaterial.tour.dao.TourDAO;
 import explora.de.exploramaterial.tour.entity.Tour;
 import explora.de.exploramaterial.R;
 import explora.de.exploramaterial.tour.view.CreateTourFragment;
 import explora.de.exploramaterial.tour.view.SingleTourFragment;
-import explora.de.exploramaterial.tour.view.TourCardFragment;
 import explora.de.exploramaterial.tour.view.TourCardClickListener;
-import explora.de.exploramaterial.tour.dao.TourDAO;
-import explora.de.exploramaterial.database.DatabaseHelper;
+import explora.de.exploramaterial.tour.view.TourCardFragment;
 
-public class MainActivity extends AppCompatActivity implements AreaCardClickListener, TourCardClickListener {
+public class MainActivity extends AppCompatActivity implements AreaCardClickListener, TourCardClickListener, FragmentDrawer.FragmentDrawerListener {
 
     public static DatabaseHelper databaseHelper;
+    private Toolbar mToolbar;
+    private FragmentDrawer drawerFragment;
 
     public static final String PREFS_LOGIN = "login_prefs";
     private static final String TAG = "Main Activity";
@@ -43,6 +47,16 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        drawerFragment = (FragmentDrawer)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        drawerFragment.setDrawerListener(this);
 
         SharedPreferences settings = getSharedPreferences(PREFS_LOGIN, 0);
         currentUser = settings.getString("userName","");
@@ -68,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
     }
 
     public void changeFragment(int containerId, Fragment targetFragment){
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(containerId, targetFragment);
         fragmentTransaction.addToBackStack(null);
@@ -112,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle action bar actions click
         switch (item.getItemId()) {
             case R.id.action_settings:
@@ -148,6 +163,47 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onDrawerItemSelected(View view, int position) {
+        displayView(position);
+    }
+
+    private void displayView(int position) {
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
+        switch (position) {
+            case R.id.action_logout:
+                SharedPreferences settings = getSharedPreferences(PREFS_LOGIN, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.remove("logged");
+                editor.commit();
+                Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+                this.startActivity(myIntent);
+                finish();
+                break;
+            /*case 1:
+                fragment = new FriendsFragment();
+                title = getString(R.string.title_friends);
+                break;
+            case 2:
+                fragment = new MessagesFragment();
+                title = getString(R.string.title_messages);
+                break;
+            default:
+                break;*/
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+
+            // set the toolbar title
+            getSupportActionBar().setTitle(title);
         }
     }
 }

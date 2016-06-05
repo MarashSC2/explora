@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">Explora</string>
     <string name="action_settings">Einstellungen</string>
+    <string name="action_search">Suche</string>
     <string name="action_logout">Abmelden</string>
     <string name="action_about">About</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- navigation drawer item labels  -->
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="nav_item_search_tour">Tour finden</string>
+    <string name="nav_item_offer_tour">Tour anbieten</string>
+    <string name="nav_item_logout">Abmelden</string>
+
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_search_tour</item>
+        <item>@string/nav_item_offer_tour</item>
+        <item>@string/nav_item_logout</item>
+    </string-array>
+
 </resources>
