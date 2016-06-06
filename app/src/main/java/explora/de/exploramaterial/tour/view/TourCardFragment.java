@@ -1,8 +1,8 @@
 package explora.de.exploramaterial.tour.view;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +11,10 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import explora.de.exploramaterial.tour.entity.Tour;
 import explora.de.exploramaterial.MainActivity.MainActivity;
 import explora.de.exploramaterial.R;
 import explora.de.exploramaterial.tour.dao.TourDAO;
+import explora.de.exploramaterial.tour.entity.Tour;
 
 /**
  * Created by Marash on 26.05.2016.

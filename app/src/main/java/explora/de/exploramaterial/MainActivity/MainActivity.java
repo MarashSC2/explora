@@ -27,7 +27,6 @@ import explora.de.exploramaterial.area.view.AreaCardFragment;
 import explora.de.exploramaterial.database.DatabaseHelper;
 import explora.de.exploramaterial.tour.dao.TourDAO;
 import explora.de.exploramaterial.tour.entity.Tour;
-import explora.de.exploramaterial.R;
 import explora.de.exploramaterial.tour.view.CreateTourFragment;
 import explora.de.exploramaterial.tour.view.SingleTourFragment;
 import explora.de.exploramaterial.tour.view.TourCardClickListener;
@@ -69,24 +68,18 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
 
         databaseHelper = new DatabaseHelper(this.getApplicationContext());
 
-
-        if (findViewById(R.id.fragment_container) != null) {
-
-            if (savedInstanceState != null) {
-                return;
-            }
-            AreaCardFragment cityFragment = new AreaCardFragment();
-            getFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, cityFragment).commit();
-        }
+        displayView(0);
     }
 
-    public void changeFragment(int containerId, Fragment targetFragment){
+    public void changeFragment(int containerId, Fragment targetFragment, String title){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(containerId, targetFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+        if(title != null){
+            getSupportActionBar().setTitle(title);
+        }
     }
 
     @Override
@@ -101,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
         args.putString(SingleTourFragment.ARG_USER, currentUser);
         args.putSerializable(SingleTourFragment.ARG_TOUR, (Serializable)tours);
         topTourFragment.setArguments(args);
-        changeFragment(R.id.fragment_container, topTourFragment);
+        changeFragment(R.id.fragment_container, topTourFragment, getString(R.string.tour_card_fragment));
     }
 
     @Override
@@ -115,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
         args.putString(SingleTourFragment.ARG_USER, currentUser);
         args.putSerializable(SingleTourFragment.ARG_TOUR, (Serializable)tour);
         singleTourFragment.setArguments(args);
-        changeFragment(R.id.fragment_container, singleTourFragment);
+        changeFragment(R.id.fragment_container, singleTourFragment, getString(R.string.single_tour_fragment));
     }
 
     @Override
@@ -129,28 +122,6 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
 
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.action_settings:
-
-                CreateTourFragment createTourFragment = new CreateTourFragment();
-                Bundle args = new Bundle();
-                args.putString(SingleTourFragment.ARG_USER, currentUser);
-                createTourFragment.setArguments(args);
-                changeFragment(R.id.fragment_container, createTourFragment);
-               /* Intent myIntent = new Intent(this, SettingsActivity.class);
-                //myIntent.putExtra("key", value); //Optional parameters
-                this.startActivity(myIntent);
-                 */
-                return true;
-
-            case R.id.action_logout:
-                SharedPreferences settings = getSharedPreferences(PREFS_LOGIN, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.remove("logged");
-                editor.commit();
-                Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
-                this.startActivity(myIntent);
-                finish();
-                return true;
             case R.id.action_about:
                 String about = "Impressum:\n" +
                         "Explora GmbH\n";
@@ -175,7 +146,18 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
         Fragment fragment = null;
         String title = getString(R.string.app_name);
         switch (position) {
-            case R.id.action_logout:
+            case 0:
+                fragment = new AreaCardFragment();
+                changeFragment(R.id.fragment_container, fragment, getString(R.string.area_card_fragment));
+                break;
+            case 1:
+                fragment = new CreateTourFragment();
+                Bundle args = new Bundle();
+                args.putString(SingleTourFragment.ARG_USER, currentUser);
+                fragment.setArguments(args);
+                changeFragment(R.id.fragment_container, fragment, getString(R.string.create_tour_fragment));
+                break;
+            case 2:
                 SharedPreferences settings = getSharedPreferences(PREFS_LOGIN, 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.remove("logged");
@@ -184,26 +166,8 @@ public class MainActivity extends AppCompatActivity implements AreaCardClickList
                 this.startActivity(myIntent);
                 finish();
                 break;
-            /*case 1:
-                fragment = new FriendsFragment();
-                title = getString(R.string.title_friends);
-                break;
-            case 2:
-                fragment = new MessagesFragment();
-                title = getString(R.string.title_messages);
-                break;
             default:
-                break;*/
-        }
-
-        if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment);
-            fragmentTransaction.commit();
-
-            // set the toolbar title
-            getSupportActionBar().setTitle(title);
+                break;
         }
     }
 }
