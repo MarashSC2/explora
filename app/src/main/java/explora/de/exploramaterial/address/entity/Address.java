@@ -16,6 +16,8 @@ public class Address implements Entity {
     private String street;
     private String zipCode;
 
+    public Address(){};
+
     public Address(String city) {
         this.city = city;
     }
@@ -39,6 +41,14 @@ public class Address implements Entity {
         values.put(DatabaseConstants.AddressEntry.COLUMN_NAME_ZIP_CODE, zipCode);
 
         return values;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return this.id;
     }
 
     public String getCountry() {

@@ -6,12 +6,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import explora.de.exploramaterial.MainActivity.MainActivity;
 import explora.de.exploramaterial.R;
+import explora.de.exploramaterial.address.dao.AddressDAO;
+import explora.de.exploramaterial.address.entity.Address;
 import explora.de.exploramaterial.tour.dao.TourDAO;
 import explora.de.exploramaterial.tour.entity.Tour;
 import explora.de.exploramaterial.user.dao.UserDAO;
@@ -26,7 +31,6 @@ public class SingleTourFragment extends Fragment {
 
     public static final String ARG_TOUR = "argTour";
     public static final String ARG_USER= "userName";
-
     private View rootView;
 
     @Override
@@ -48,6 +52,40 @@ public class SingleTourFragment extends Fragment {
                 editMode = true;
         }
 
+        AddressDAO addressdao = new AddressDAO(MainActivity.databaseHelper);
+        Address address = addressdao.findById(tour.getAddress());
+        int addressSelection = 0;
+        if(address.getCity().equals("Berlin")) {
+            addressSelection = 0;
+        }
+        else if(address.getCity().equals("London")) {
+            addressSelection = 1;
+        }
+        else if(address.getCity().equals("Stuttgart")) {
+            addressSelection = 2;
+        }
+
+        final EditText titleTextView = (EditText) rootView.findViewById(R.id.title);
+        titleTextView.setEnabled(editMode);
+        titleTextView.setText(tour.getTitle());
+
+
+        final Spinner spinner = (Spinner) rootView.findViewById(R.id.city);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.city_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setEnabled(editMode);
+        spinner.setSelection(addressSelection);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         final EditText dateTextView = (EditText) rootView.findViewById(R.id.date);
         dateTextView.setEnabled(editMode);
@@ -65,6 +103,10 @@ public class SingleTourFragment extends Fragment {
         tourGuideTextView.setEnabled(editMode);
         tourGuideTextView.setText(tour.getTourGuide());
 
+        final EditText priceTextView = (EditText) rootView.findViewById(R.id.price);
+        priceTextView.setEnabled(editMode);
+        priceTextView.setText(String.valueOf(tour.getPrice()));
+
         final EditText descriptionTextView = (EditText) rootView.findViewById(R.id.description);
         descriptionTextView.setEnabled(editMode);
         descriptionTextView.setText(tour.getDescription());
@@ -79,10 +121,10 @@ public class SingleTourFragment extends Fragment {
             public void onClick(View v) {
                 Tour savedTour = new Tour();
                 savedTour.setId(tour.getId());
-                savedTour.setTitle(tour.getTitle());
-                savedTour.setAddress(tour.getAddress());
-                savedTour.setPrice(tour.getPrice());
                 savedTour.setOwner(tour.getOwner());
+                savedTour.setAddress(1);
+                savedTour.setTitle(titleTextView.getText().toString());
+                savedTour.setPrice(Integer.parseInt(priceTextView.getText().toString()));
                 savedTour.setDateTime(dateTextView.getText().toString());
                 savedTour.setMeetingSpot(meetingSpotTextView.getText().toString());
                 savedTour.setTourGuide(tourGuideTextView.getText().toString());

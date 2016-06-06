@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.List;
 
@@ -30,7 +32,6 @@ public class TourCardFragment extends Fragment {
         containerId = container.getId();
         rootView = inflater.inflate(R.layout.tour_cardlist_fragment, container, false);
         context = inflater.getContext();
-
         return rootView;
     }
 
@@ -40,11 +41,13 @@ public class TourCardFragment extends Fragment {
 
         ListView tourListView = (ListView) rootView.findViewById(R.id.tour_list_view_fragment);
 
-        TourDAO tourDao = new TourDAO(MainActivity.databaseHelper);
-
-        List<Tour> tours = tourDao.getAllTours();
+        List<Tour> tours = (List<Tour>)  getArguments().getSerializable(SingleTourFragment.ARG_TOUR);
 
         ArrayAdapter adapter = new TourCardAdapter(context, tours,(TourCardClickListener)getActivity());
         tourListView.setAdapter(adapter);
+
+
     }
+
+
 }

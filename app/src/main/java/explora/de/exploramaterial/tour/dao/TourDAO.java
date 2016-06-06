@@ -3,6 +3,7 @@ package explora.de.exploramaterial.tour.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,16 +124,12 @@ public class TourDAO {
     public List<Tour> findByCity(String city) {
         List<Tour> tours = new ArrayList<>();
 
-        Cursor cursor = database.query(
-                DatabaseConstants.TourEntry.TABLE_NAME,
-                projection,
-                "meetingSpot = ?",
-                new String[] { String.valueOf(city) },
-                null,
-                null,
-                null,
-                null
-        );
+        String MY_QUERY = "SELECT * FROM "+DatabaseConstants.TourEntry.TABLE_NAME+" a INNER JOIN "+DatabaseConstants.AddressEntry.TABLE_NAME+" b ON "+DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS+"=b."+DatabaseConstants.AddressEntry._ID+" WHERE b."+DatabaseConstants.AddressEntry.COLUMN_NAME_CITY+"=?";
+
+        Cursor cursor = database.rawQuery(MY_QUERY, new String[]{city});
+
+        if(cursor.getCount()<1)
+            return tours;
 
         while(cursor.moveToNext()){
             String id = cursor.getString(cursor.getColumnIndex(DatabaseConstants.TourEntry._ID));

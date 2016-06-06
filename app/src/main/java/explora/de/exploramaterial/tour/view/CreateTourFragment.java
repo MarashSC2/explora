@@ -5,8 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import explora.de.exploramaterial.MainActivity.MainActivity;
@@ -39,6 +42,24 @@ public class CreateTourFragment extends Fragment {
         final User creator = userdao.findByEmail(userMail);
 
 
+        final EditText titleTextView = (EditText) rootView.findViewById(R.id.title);
+        titleTextView.setEnabled(true);
+
+        final Spinner spinner = (Spinner) rootView.findViewById(R.id.city);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.city_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         final EditText dateTextView = (EditText) rootView.findViewById(R.id.date);
         dateTextView.setEnabled(true);
 
@@ -50,6 +71,9 @@ public class CreateTourFragment extends Fragment {
 
         final EditText tourGuideTextView = (EditText) rootView.findViewById(R.id.tour_guide);
         tourGuideTextView.setEnabled(true);
+
+        final EditText priceTextView = (EditText) rootView.findViewById(R.id.price);
+        priceTextView.setEnabled(true);
 
         final EditText descriptionTextView = (EditText) rootView.findViewById(R.id.description);
         descriptionTextView.setEnabled(true);
@@ -63,9 +87,9 @@ public class CreateTourFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Tour savedTour = new Tour();
-                savedTour.setTitle("Statisch Title");
                 savedTour.setAddress(1);
-                savedTour.setPrice(25);
+                savedTour.setTitle(titleTextView.getText().toString());
+                savedTour.setPrice(Integer.parseInt(priceTextView.getText().toString()));
                 savedTour.setOwner(creator.getId());
                 savedTour.setDateTime(dateTextView.getText().toString());
                 savedTour.setMeetingSpot(meetingSpotTextView.getText().toString());

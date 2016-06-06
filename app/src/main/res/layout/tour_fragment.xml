@@ -15,7 +15,7 @@
 
   <android.support.v7.widget.CardView
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="250dp"
       android:layout_margin="@dimen/card_margin">
 
   <LinearLayout
@@ -48,13 +48,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#000000"
+        android:text="Titel" />
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/twoh_primary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+   </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/card_margin">
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:padding="18dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="Stadt" />
+
+    <Spinner
+        android:id="@+id/city"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/twoh_primary"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+   </LinearLayout>
+
+  </android.support.v7.widget.CardView>
+
+
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/card_margin">
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:padding="18dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
         android:text="Datum" />
 
     <EditText
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="29.05.2016"
+        android:text=""
         android:textColor="@color/twoh_primary"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -85,7 +144,7 @@
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="17:00 Uhr"
+        android:text=""
         android:textColor="@color/twoh_primary"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -116,7 +175,7 @@
         android:id="@+id/meeting_spot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Güntherklotz Anlage"
+        android:text=""
         android:textColor="@color/twoh_primary"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -148,7 +207,7 @@
         android:id="@+id/tour_guide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Franz Ferdinand"
+        android:text=""
         android:textColor="@color/twoh_primary"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
@@ -181,7 +240,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:text="Wunderschöne Tour durch die Straßen von Berlin. Ist jedem zu empfehlen der gerne auf seinen Füßen unterwegs ist." />
+        android:text="" />
 
    </LinearLayout>
 
@@ -204,9 +263,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Buchen für 25€"
-        android:textColor="@color/twoh_primary"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+        android:text="Preis"/>
+
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:text="" />
 
    </LinearLayout>
 
@@ -243,7 +307,7 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:textColor="#000000"
-       android:text="Bewertungen" />
+       android:text="" />
 
   </RelativeLayout>
 
