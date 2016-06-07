@@ -1,6 +1,8 @@
 package explora.de.exploramaterial.NavigationDraw;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +21,9 @@ import java.util.List;
 
 import explora.de.exploramaterial.R;
 
+/**
+ * Navigationsbar auf der linken Seite. Menüdaten werden hier gesetzt und die View erstellt.
+ */
 public class FragmentDrawer extends Fragment {
     private static String TAG = FragmentDrawer.class.getSimpleName();
 
@@ -28,6 +33,7 @@ public class FragmentDrawer extends Fragment {
     private NavigationDrawerAdapter adapter;
     private View containerView;
     private static String[] titles = null;
+    private static TypedArray icons;
     private FragmentDrawerListener drawerListener;
 
     public FragmentDrawer() {
@@ -42,10 +48,11 @@ public class FragmentDrawer extends Fragment {
         List<NavDrawerItem> data = new ArrayList<>();
 
 
-        // preparing navigation drawer items
+        // Erzeugen der Menüeinträge
         for (int i = 0; i < titles.length; i++) {
             NavDrawerItem navItem = new NavDrawerItem();
             navItem.setTitle(titles[i]);
+            navItem.setIcon(icons.getResourceId(i,-1));
             data.add(navItem);
         }
         return data;
@@ -55,17 +62,20 @@ public class FragmentDrawer extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // drawer labels
+        // Labels eines Menüeintrags
         titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
+        icons = getResources()
+                .obtainTypedArray(R.array.nav_drawer_icons);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflating view layout
+
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
 
+        //Setzen der Menüeinträge via Adapter
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -86,6 +96,7 @@ public class FragmentDrawer extends Fragment {
     }
 
 
+    //Event für die Wischgeste
     public void setUp(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         containerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
@@ -119,12 +130,7 @@ public class FragmentDrawer extends Fragment {
 
     }
 
-    public static interface ClickListener {
-        public void onClick(View view, int position);
-
-        public void onLongClick(View view, int position);
-    }
-
+    //Gestenerkennung
     static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
         private GestureDetector gestureDetector;
@@ -166,11 +172,5 @@ public class FragmentDrawer extends Fragment {
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
         }
-
-
-    }
-
-    public interface FragmentDrawerListener {
-        public void onDrawerItemSelected(View view, int position);
     }
 }

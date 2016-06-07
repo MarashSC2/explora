@@ -79,12 +79,12 @@ public class UserDAO {
             String name = cursor.getString(cursor.getColumnIndex(DatabaseConstants.UserEntry.COLUMN_NAME_NAME));
             String password = cursor.getString(cursor.getColumnIndex(DatabaseConstants.UserEntry.COLUMN_NAME_PASSWORD));
 
-            users.add(new User (mail, name, password));
+            users.add(new User (mail, password, name));
         }
         if(users.size()==0){
             return null;
         }
-        return users.get(0).getEmail();
+        return users.get(0).getPassword();
 
     }
 

@@ -25,12 +25,18 @@ import explora.de.exploramaterial.user.entity.User;
 /**
  * Created by Marash on 26.05.2016.
  */
+
+/**
+ * Anzeigen einer Tour
+ */
 public class SingleTourFragment extends Fragment {
 
     private static final String TAG = "SingleTourFragment";
 
     public static final String ARG_TOUR = "argTour";
     public static final String ARG_USER= "userName";
+
+    public int citySelection = 1;
     private View rootView;
 
     @Override
@@ -45,6 +51,7 @@ public class SingleTourFragment extends Fragment {
         UserDAO userDao = new UserDAO(MainActivity.databaseHelper);
         boolean editMode = false;
 
+        //Prüfen ob der aktuelle Benutzer der Eigner einer Tour ist
         if(tour != null  && userMail != null) {
             User tourOwner = userDao.findById(tour.getOwner());
             Log.d(TAG,tourOwner.getEmail()+" equals "+userMail);
@@ -52,17 +59,21 @@ public class SingleTourFragment extends Fragment {
                 editMode = true;
         }
 
+        //Area Auswahl für den Spinner -  Teilweise gemocked
         AddressDAO addressdao = new AddressDAO(MainActivity.databaseHelper);
         Address address = addressdao.findById(tour.getAddress());
         int addressSelection = 0;
         if(address.getCity().equals("Berlin")) {
             addressSelection = 0;
+            citySelection =4;
         }
         else if(address.getCity().equals("London")) {
             addressSelection = 1;
+            citySelection=6;
         }
         else if(address.getCity().equals("Stuttgart")) {
             addressSelection = 2;
+            citySelection = 1;
         }
 
         final EditText titleTextView = (EditText) rootView.findViewById(R.id.title);
@@ -80,6 +91,12 @@ public class SingleTourFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0)
+                    citySelection = 4;
+                else if(position ==1)
+                    citySelection =6;
+                else if(position==2)
+                    citySelection =1;
             }
 
             @Override
@@ -116,13 +133,14 @@ public class SingleTourFragment extends Fragment {
         ratingTextView.setText(tour.getRating());
 
         Button saveButton = (Button) rootView.findViewById(R.id.saveButton);
+        // Speichern bzw. bearbeiten der Tour, falls Rechte vorhanden sind
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Tour savedTour = new Tour();
                 savedTour.setId(tour.getId());
                 savedTour.setOwner(tour.getOwner());
-                savedTour.setAddress(1);
+                savedTour.setAddress(citySelection);
                 savedTour.setTitle(titleTextView.getText().toString());
                 savedTour.setPrice(Integer.parseInt(priceTextView.getText().toString()));
                 savedTour.setDateTime(dateTextView.getText().toString());

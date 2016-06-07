@@ -24,6 +24,7 @@ public class AddressDAO {
             DatabaseConstants.AddressEntry.COLUMN_NAME_ZIP_CODE
 
     };
+
     public AddressDAO(DatabaseHelper databaseHelper) {
         database = databaseHelper.getWritableDatabase();
     }
@@ -41,7 +42,7 @@ public class AddressDAO {
                 null
         );
 
-        if(cursor.getCount() <1){
+        if (cursor.getCount() < 1) {
             return addresses;
         }
 

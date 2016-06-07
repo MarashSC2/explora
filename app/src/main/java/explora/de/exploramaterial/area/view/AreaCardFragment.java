@@ -20,6 +20,10 @@ import explora.de.exploramaterial.address.entity.Address;
 /**
  * Created by Marash on 25.05.2016.
  */
+
+/**
+ * Stellt eine View einer einzelnen Area dar (z.B. Berlin)
+ */
 public class AreaCardFragment extends Fragment {
 
     private View rootView;

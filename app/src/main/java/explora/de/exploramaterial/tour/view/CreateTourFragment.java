@@ -22,12 +22,18 @@ import explora.de.exploramaterial.user.entity.User;
 /**
  * Created by Marash on 26.05.2016.
  */
+
+/**
+ * View für das Erstellen einer Tour
+ */
 public class CreateTourFragment extends Fragment {
 
     private static final String TAG = "SingleTourFragment";
 
     public static final String ARG_TOUR = "argTour";
     public static final String ARG_USER= "userName";
+
+    public int citySelection = 1;
 
     private View rootView;
 
@@ -45,6 +51,7 @@ public class CreateTourFragment extends Fragment {
         final EditText titleTextView = (EditText) rootView.findViewById(R.id.title);
         titleTextView.setEnabled(true);
 
+        //Spinner (SelectBox) für die Areas (Städte)
         final Spinner spinner = (Spinner) rootView.findViewById(R.id.city);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.city_array, android.R.layout.simple_spinner_item);
@@ -53,6 +60,12 @@ public class CreateTourFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==0)
+                    citySelection = 4;
+                else if(position ==1)
+                    citySelection =6;
+                else if(position==2)
+                    citySelection =1;
             }
 
             @Override
@@ -83,11 +96,12 @@ public class CreateTourFragment extends Fragment {
 
         Button saveButton = (Button) rootView.findViewById(R.id.saveButton);
         saveButton.setText("Anlegen");
+        //Auslesen der Werte und Speichern der Tour in der Datenbank
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Tour savedTour = new Tour();
-                savedTour.setAddress(1);
+                savedTour.setAddress(citySelection);
                 savedTour.setTitle(titleTextView.getText().toString());
                 savedTour.setPrice(Integer.parseInt(priceTextView.getText().toString()));
                 savedTour.setOwner(creator.getId());

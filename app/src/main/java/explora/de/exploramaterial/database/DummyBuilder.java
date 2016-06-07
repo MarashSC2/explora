@@ -10,6 +10,10 @@ import explora.de.exploramaterial.user.entity.User;
 /**
  * Created by Marash on 25.05.2016.
  */
+
+/**
+ * Erzeugt Dummydaten für die Installation
+ */
 public class DummyBuilder {
 
     public List<User> getDummyUsers (){
@@ -38,11 +42,11 @@ public class DummyBuilder {
 
     public List<Tour> getDummyTours (){
         List<Tour> tours = new ArrayList<>();
-        tours.add(new Tour(1, "29.05.2016 15:00", "Neuler", "Ursula", 50, "Neuler", "Schöne Umgebung", "Gut", 1,1));
-        tours.add(new Tour(2, "29.05.2016 15:00", "Stuttgart", "Ursula", 50, "Stuttgart", "Schöne Umgebung", "Gut", 1,1));
-        tours.add(new Tour(3, "29.05.2016 15:00", "Karlsruhe Forest", "Ursula", 50, "Karlsruhe Forest", "Schöne Umgebung", "Gut", 4,2));
-        tours.add(new Tour(4, "29.05.2016 15:00", "Durlach", "Ursula", 50, "Durlach", "Schöne Umgebung", "Gut", 4,2));
-        tours.add(new Tour(5, "29.05.2016 15:00", "Schwarzwald", "Ursula", 50, "Schwarzwald", "Schöne Umgebung", "Gut", 6,3));
+        tours.add(new Tour(1, "29.05.2016 15:00", "Neuler", "Andreas", 50, "Traktor fahren", "Hochmodernisierter Traktor", "Ein Erlebnis, dass man nie vergessen wird!", 1,1));
+        tours.add(new Tour(2, "29.05.2016 15:00", "Stuttgart", "Pascal", 50, "Stadtführung", "Genießen Sie die Highlights des Schwaben landes", "Stuttgart ist leider in der zweiten Liga", 1,1));
+        tours.add(new Tour(3, "29.05.2016 15:00", "Berlin-Mitte", "Ursula", 50, "Shopping Tour", "Geheimtipps in Berlin!", "Ursula ist der Hammer!", 4,2));
+        tours.add(new Tour(4, "29.05.2016 15:00", "Berlin-Kreuzberg", "Aladdin", 50, "Teppich-Rundfahrt mit Aladdin", "Berlin aus einer anderen Perspektive", "Dschini war leider nicht dabei...", 4,2));
+        tours.add(new Tour(5, "29.05.2016 15:00", "London", "Herbert", 50, "Big-Ben Führung", "Beindruckender Turm mit Uhr.", "Hab noch nie so eine große Uhr gesehen!!!", 6,3));
         return tours;
     }
 }

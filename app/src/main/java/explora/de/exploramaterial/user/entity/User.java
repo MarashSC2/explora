@@ -34,12 +34,14 @@ public class User implements Entity {
 
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
-        values.put(DatabaseConstants.TourEntry._ID, id);
+        values.put(DatabaseConstants.UserEntry._ID, id);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_NAME, name);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_MAIL, email);
         values.put(DatabaseConstants.UserEntry.COLUMN_NAME_PASSWORD, password);
         return values;
     }
+
+
 
     public String getPassword() {
         return password;

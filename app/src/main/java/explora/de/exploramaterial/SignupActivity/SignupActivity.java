@@ -19,6 +19,9 @@ import butterknife.InjectView;
 import explora.de.exploramaterial.user.entity.User;
 import explora.de.exploramaterial.user.service.UserService;
 
+/**
+ * Verwaltet den Signup und verweßt bei Bedarf zurück auf die Loginactivity
+ */
 public class SignupActivity extends AppCompatActivity {
     private static final String TAG = "SignupActivity";
     public static final String PREFS_LOGIN = "login_prefs";
@@ -47,8 +50,7 @@ public class SignupActivity extends AppCompatActivity {
         _loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
-                finish();
+                         finish();
             }
         });
     }
@@ -63,7 +65,7 @@ public class SignupActivity extends AppCompatActivity {
 
         _signupButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this);//,R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
@@ -71,8 +73,6 @@ public class SignupActivity extends AppCompatActivity {
         final String name = _nameText.getText().toString();
         final String email = _emailText.getText().toString();
         final String password = _passwordText.getText().toString();
-
-        // TODO: Implement your own signup logic here.
 
         new android.os.Handler().postDelayed(
                 new Runnable() {

@@ -21,6 +21,10 @@ import explora.de.exploramaterial.tour.entity.Tour;
 /**
  * Created by Marash on 26.05.2016.
  */
+
+/**
+ * CardFragment für eine Tour
+ */
 public class TourCardFragment extends Fragment {
 
     private View rootView;

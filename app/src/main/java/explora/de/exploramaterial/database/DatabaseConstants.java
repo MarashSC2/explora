@@ -5,6 +5,10 @@ import android.provider.BaseColumns;
 /**
  * Created by Marash on 25.05.2016.
  */
+
+/**
+ * String Konstanten für die Datenbankzugriffe
+ */
 public class DatabaseConstants {
 
     public static int DB_VERSION = 3;

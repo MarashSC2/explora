@@ -14,19 +14,31 @@ public class UserService {
     public UserService(Context context){
         userDao = new UserDAO(new DatabaseHelper(context));
     }
+
+    /**
+     * prüft ob der übergebene User die korrekten Credentials besitzt
+     * @param user
+     * @return Erfolg
+     */
     public boolean isLoginCorrect(User user){
         if(user==null)
             return false;
         String password=userDao.findPasswordByEMail(user.getEmail());
-        if(password==null||password.equals(user.getPassword()))
+        if(password==null||!password.equals(user.getPassword()))
             return false;
         return true;
     }
+
+    /**
+     * fügt einen neuen User hinzu
+     * @param user
+     * @return Erfolg
+     */
     public boolean signUp(User user) {
         if (user == null) {
             return false;
         }
-        boolean x=userDao.save(user);
-        return x;
+        return userDao.save(user);
+
     }
 }

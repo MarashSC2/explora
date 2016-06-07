@@ -38,11 +38,10 @@ public class Tour implements Entity, Serializable {
         this.owner = owner;
     }
 
-    @Override
-    public ContentValues getContentValues() {
+
+    public ContentValues getInsertContentValues() {
         ContentValues values = new ContentValues();
 
-        values.put(DatabaseConstants.TourEntry._ID, id);
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_DATETIME, dateTime);
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_MEETING_SPOT, meetingSpot);
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_TOUR_GUIDE, tourGuide);
@@ -52,6 +51,13 @@ public class Tour implements Entity, Serializable {
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_RATING, rating);
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_ADDRESS, address);
         values.put(DatabaseConstants.TourEntry.COLUMN_NAME_OWNER, owner);
+
+        return values;
+    }
+    @Override
+    public ContentValues getContentValues() {
+        ContentValues values = getInsertContentValues();
+        values.put(DatabaseConstants.TourEntry._ID, id);
 
         return values;
     }

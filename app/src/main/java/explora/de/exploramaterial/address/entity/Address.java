@@ -16,7 +16,8 @@ public class Address implements Entity {
     private String street;
     private String zipCode;
 
-    public Address(){};
+    public Address() {
+    }
 
     public Address(String city) {
         this.city = city;
@@ -34,7 +35,7 @@ public class Address implements Entity {
     public ContentValues getContentValues() {
         ContentValues values = new ContentValues();
 
-        values.put(DatabaseConstants.AddressEntry._ID,id);
+        values.put(DatabaseConstants.AddressEntry._ID, id);
         values.put(DatabaseConstants.AddressEntry.COLUMN_NAME_COUNTRY, country);
         values.put(DatabaseConstants.AddressEntry.COLUMN_NAME_CITY, city);
         values.put(DatabaseConstants.AddressEntry.COLUMN_NAME_STREET, street);
@@ -43,11 +44,11 @@ public class Address implements Entity {
         return values;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
-    public int getId(){
+    public int getId() {
         return this.id;
     }
 

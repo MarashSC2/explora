@@ -10,18 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import explora.de.exploramaterial.SignupActivity.SignupActivity;
-import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 import explora.de.exploramaterial.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,6 +19,9 @@ import explora.de.exploramaterial.MainActivity.MainActivity;
 import explora.de.exploramaterial.user.entity.User;
 import explora.de.exploramaterial.user.service.UserService;
 
+/**
+ * Verwaltet den Login und verweißt bei Bedarf auf Main- und Signupactivity
+ */
 public class LoginActivity extends AppCompatActivity {
     public static final String PREFS_LOGIN = "login_prefs";
 
@@ -47,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.inject(this);
 
+        //Speichern des angemeldeten Benutzers im Speicher
         SharedPreferences settings = getSharedPreferences(PREFS_LOGIN,0);
         Log.d(TAG,"OnCreate Login is: "+settings.getString("logged", "").toString());
 
@@ -67,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // Start the Signup activity
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
@@ -86,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         _loginButton.setEnabled(false);
 
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);//,R.style.AppTheme_Dark_Dialog);
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
@@ -94,14 +87,10 @@ public class LoginActivity extends AppCompatActivity {
         final String email = _emailText.getText().toString();
         final String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
-
-        //
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
                         if(userService.isLoginCorrect(new User(email,password,null))){
                             onLoginSuccess();
                         }else{
@@ -118,14 +107,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
                 SharedPreferences settings = getSharedPreferences(PREFS_LOGIN, 0);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("logged", "logged");
                 editor.putString("userName", _emailText.getText().toString());
                 editor.commit();
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
                 this.finish();
             }
         }
@@ -146,7 +132,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // disable going back to the MainActivity
         moveTaskToBack(true);
     }
 
@@ -166,7 +151,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
     }
 

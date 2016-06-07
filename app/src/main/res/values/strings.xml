@@ -20,12 +20,20 @@
     <string name="nav_item_search_tour">Tour finden</string>
     <string name="nav_item_offer_tour">Tour anbieten</string>
     <string name="nav_item_logout">Abmelden</string>
+    <string name="search_hint">Nach Tour suchen...</string>
+    <string name="desc_list_item_icon">Item Icon</string>
 
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_search_tour</item>
         <item>@string/nav_item_offer_tour</item>
         <item>@string/nav_item_logout</item>
     </string-array>
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/search48</item>
+        <item>@drawable/plus48</item>
+        <item>@drawable/logoutrounded48</item>
+    </array>
 
     <string-array name="city_array">
         <item>Berlin</item>

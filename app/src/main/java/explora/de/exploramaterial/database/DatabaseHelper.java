@@ -15,6 +15,10 @@ import explora.de.exploramaterial.user.entity.User;
 /**
  * Created by Marash on 25.05.2016.
  */
+
+/**
+ * Erzeugt die Datenbankverbindung und fügt bei installieren der App DummyDaten ein
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = DatabaseHelper.class.getSimpleName();

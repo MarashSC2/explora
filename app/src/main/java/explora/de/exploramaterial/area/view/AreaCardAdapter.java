@@ -16,8 +16,11 @@ import explora.de.exploramaterial.address.entity.Address;
 /**
  * Created by Marash on 25.05.2016.
  */
-public class AreaCardAdapter extends ArrayAdapter<Address> {
 
+/**
+ * Implementiert die Klick-Logik für eine ausgewählte Area (z.B.Berlin).
+ */
+public class AreaCardAdapter extends ArrayAdapter<Address> {
     private Context context;
     private List<Address> addresses;
     private AreaCardClickListener cardClickListener;
