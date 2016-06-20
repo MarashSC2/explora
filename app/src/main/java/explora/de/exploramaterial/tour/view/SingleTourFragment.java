@@ -142,7 +142,11 @@ public class SingleTourFragment extends Fragment {
                 savedTour.setOwner(tour.getOwner());
                 savedTour.setAddress(citySelection);
                 savedTour.setTitle(titleTextView.getText().toString());
-                savedTour.setPrice(Integer.parseInt(priceTextView.getText().toString()));
+                try {
+                    savedTour.setPrice(Integer.parseInt(priceTextView.getText().toString()));
+                }catch (Exception ex){
+                    savedTour.setPrice(0);
+                }
                 savedTour.setDateTime(dateTextView.getText().toString());
                 savedTour.setMeetingSpot(meetingSpotTextView.getText().toString());
                 savedTour.setTourGuide(tourGuideTextView.getText().toString());

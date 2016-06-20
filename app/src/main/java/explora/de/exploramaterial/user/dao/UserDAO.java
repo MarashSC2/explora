@@ -116,8 +116,25 @@ public class UserDAO {
 
         return user;
     }
+    public int getLastId() {
+        String query = "SELECT MAX(_id) AS max_id FROM user";
+        Cursor cursor = database.rawQuery(query,null);
+
+        int id = 0;
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                id = cursor.getInt(0);
+            } while(cursor.moveToNext());
+        }
+        return id;
+
+    }
+
 
     public boolean save(User user){
+        user.setId(getLastId()+1);
         ContentValues values = user.getContentValues();
         return database.insert(DatabaseConstants.UserEntry.TABLE_NAME,null,values)>-1;
     }
